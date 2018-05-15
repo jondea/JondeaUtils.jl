@@ -24,3 +24,15 @@ end
 
 "Turns n-dim array into vector"
 flatten(a::AbstractArray) = reshape(a, :)
+
+function rel_abs_error(exact::Complex{T}, vec::Complex{T})::T where {T}
+    abs(exact - vec)/abs(exact)
+end
+
+function max_rel_abs_error(exact::Vector{Complex{T}}, vec::Vector{Complex{T}})::T where {T}
+    current_max = zero(T)
+    for i in eachindex(exact)
+        current_max = max(current_max, rel_abs_error(exact[i], vec[i]))
+    end
+    return current_max
+end
