@@ -12,7 +12,9 @@ using SpecialFunctions
 
 finite_diff(f,x,ε) = (f(x+ε) - f(x))/ε
 @test diffhankelh1(0,2.0+1.0im) ≈ finite_diff(z->hankelh1(0,z),2.0+1.0im,1.0e-8im) atol=1.0e-6
+@test diffhankelh1(1,2.0+1.0im) ≈ finite_diff(z->hankelh1(1,z),2.0+1.0im,1.0e-8im) atol=1.0e-6
 @test diffbesselj(0,2.0+1.0im) ≈ finite_diff(z->besselj(0,z),2.0+1.0im,1.0e-8im) atol=1.0e-6
+@test diffbesselj(1,2.0+1.0im) ≈ finite_diff(z->besselj(1,z),2.0+1.0im,1.0e-8im) atol=1.0e-6
 
 print_with_bash_colour("This should be red\n",255,0,0)
 print_with_bash_colour("This should be green\n",0,255,0)
