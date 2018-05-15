@@ -1,5 +1,6 @@
 using JondeaUtils
 using Base.Test
+using SpecialFunctions
 
 @test flatten([[1,2],[3,4]]) == [1,2,3,4]
 @test flatten([[1.0,2.0],[3.0,4.0]]) == [1.0,2.0,3.0,4.0]
