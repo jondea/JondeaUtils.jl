@@ -41,3 +41,6 @@ println("")
 @test all(greens(3) .≈  [RGB(0.4,1.0,0.4) RGB(0.3,0.8,0.3) RGB(0.2,0.6,0.2)])
 @test all(blues(3) .≈ [RGB(0.4,0.4,1.0) RGB(0.3,0.3,0.8) RGB(0.2,0.2,0.6)])
 
+@test reds(1) == reshape([RGB(0.8,0.3,0.3)],1,1)
+@test greens(1) == reshape([RGB(0.3,0.8,0.3)],1,1)
+@test blues(1) == reshape([RGB(0.3,0.3,0.8)],1,1)
