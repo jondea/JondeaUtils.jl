@@ -20,6 +20,12 @@ finite_diff(f,x,ε) = (f(x+ε) - f(x))/ε
 @test diffbesselj(0,2.0+1.0im) ≈ finite_diff(z->besselj(0,z),2.0+1.0im,1.0e-8im) atol=1.0e-6
 @test diffbesselj(1,2.0+1.0im) ≈ finite_diff(z->besselj(1,z),2.0+1.0im,1.0e-8im) atol=1.0e-6
 
+@test fresnels(1.0)::Float64 ≈ 0.4382591473903548
+@test fresnelc(1.0)::Float64 ≈ 0.7798934003768228
+
+@test fresnels(1.0f0)::Float32 ≈ 0.4382591f0
+@test fresnelc(1.0f0)::Float32 ≈ 0.7798934f0
+
 print_with_bash_colour("This should be red\n",255,0,0)
 print_with_bash_colour("This should be green\n",0,255,0)
 print_with_bash_colour("This should be blue\n",0,0,255)

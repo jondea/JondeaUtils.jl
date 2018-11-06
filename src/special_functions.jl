@@ -17,3 +17,7 @@ function diffbesselj(n,z)
         - besselj(1, z)
     end
 end
+
+fresnels(z::T) where T = T((1+im)//4*(erf((1+im)//2*sqrt(T(π))*z) - im*erf((1-im)//2*sqrt(T(π))*z) ))
+
+fresnelc(z::T) where T = T((1-im)//4*(erf((1+im)//2*sqrt(T(π))*z) + im*erf((1-im)//2*sqrt(T(π))*z) ))
