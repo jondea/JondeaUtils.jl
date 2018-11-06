@@ -2,6 +2,7 @@ using JondeaUtils
 using Base.Test
 using SpecialFunctions
 using Colors
+using OffsetArrays
 
 @test flatten([[1,2],[3,4]]) == [1,2,3,4]
 @test flatten([[1.0,2.0],[3.0,4.0]]) == [1.0,2.0,3.0,4.0]
@@ -13,6 +14,8 @@ using Colors
 
 @test rel_abs_error(1.0+0.0im,1.0+0.1im) ≈ 0.1
 @test max_rel_abs_error([1.0im,2.0im],[1.1im,2.4im]) ≈ 0.2
+
+@test offsetmap(x->x^2, -2:2) == OffsetArray([4,1,0,1,4],-2:2)
 
 finite_diff(f,x,ε) = (f(x+ε) - f(x))/ε
 @test diffhankelh1(0,2.0+1.0im) ≈ finite_diff(z->hankelh1(0,z),2.0+1.0im,1.0e-8im) atol=1.0e-6

@@ -36,3 +36,10 @@ function max_rel_abs_error(exact::Vector{Complex{T}}, vec::Vector{Complex{T}})::
     end
     return current_max
 end
+
+"""
+    offsetmap(fnc::Function, inds::StepRange)::OffsetArray
+
+Maps `fnc` over `inds`, returning an OffsetArray with indices of `inds`.
+"""
+offsetmap(fnc, inds) = OffsetArray(map(fnc, inds), inds)
