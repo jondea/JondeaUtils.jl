@@ -1,8 +1,8 @@
 using JondeaUtils
-using Base.Test
-using SpecialFunctions
-using Colors
-using OffsetArrays
+import Test: @test
+import SpecialFunctions: hankelh1, besselj
+import Colors: RGB
+import OffsetArrays: OffsetArray
 
 @test flatten([[1,2],[3,4]]) == [1,2,3,4]
 @test flatten([[1.0,2.0],[3.0,4.0]]) == [1.0,2.0,3.0,4.0]
@@ -28,14 +28,6 @@ finite_diff(f,x,ε) = (f(x+ε) - f(x))/ε
 
 @test fresnels(1.0f0)::Float32 ≈ 0.4382591f0
 @test fresnelc(1.0f0)::Float32 ≈ 0.7798934f0
-
-print_with_bash_colour("This should be red\n",255,0,0)
-print_with_bash_colour("This should be green\n",0,255,0)
-print_with_bash_colour("This should be blue\n",0,0,255)
-print_with_bash_colour("This should be white and bold\n",255,255,255; bold=true)
-println("This should be unbold and your normal terminal colour")
-println("")
-@test true 
 
 @test all(reds(3) .≈ [RGB(1.0,0.4,0.4) RGB(0.8,0.3,0.3) RGB(0.6,0.2,0.2)])
 @test all(greens(3) .≈  [RGB(0.4,1.0,0.4) RGB(0.3,0.8,0.3) RGB(0.2,0.6,0.2)])
