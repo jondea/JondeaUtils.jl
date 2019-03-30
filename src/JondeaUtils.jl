@@ -13,14 +13,25 @@ export real_cols_to_complex,
        fresnelc,
        reds,
        greens,
-       blues
+       blues,
+       angle,
+       round,
+       ceil,
+       floor
 
 import OffsetArrays: OffsetArray
 import SpecialFunctions: hankelh1, besselj, erf
 import Colors: RGB
+import StaticArrays: SVector
+
+import Base.angle
+import Base.round
+import Base.ceil
+import Base.floor
 
 include("special_functions.jl")
 include("array.jl")
 include("plot.jl")
+include("maths.jl")
 
 end # module

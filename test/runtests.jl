@@ -1,8 +1,9 @@
 using JondeaUtils
-import Test: @test
+import Test: @test, @test_throws
 import SpecialFunctions: hankelh1, besselj
 import Colors: RGB
 import OffsetArrays: OffsetArray
+import StaticArrays: SVector
 
 @test flatten([[1,2],[3,4]]) == [1,2,3,4]
 @test flatten([[1.0,2.0],[3.0,4.0]]) == [1.0,2.0,3.0,4.0]
@@ -36,3 +37,40 @@ finite_diff(f,x,ε) = (f(x+ε) - f(x))/ε
 @test reds(1) == reshape([RGB(0.8,0.3,0.3)],1,1)
 @test greens(1) == reshape([RGB(0.3,0.8,0.3)],1,1)
 @test blues(1) == reshape([RGB(0.3,0.3,0.8)],1,1)
+
+# Test some known values
+@test angle([1,0]) ≈ 0
+@test angle([1.0,1.0]) ≈ π/4
+@test angle([0,1]) ≈ π/2
+@test angle([-1,-1]) ≈ -3π/4
+
+# Test using SVector type
+@test angle(SVector(1,0)) ≈ 0
+@test angle(SVector(1,1)) ≈ π/4
+@test angle(SVector(0,1)) ≈ π/2
+@test angle(SVector(-1,-1)) ≈ -3π/4
+
+# Type stability
+@test typeof(angle([0.9, -1.5]))     == Float64
+@test typeof(angle([0.9f0, -1.5f0])) == Float32
+
+# Test errors
+@test_throws Exception angle([1])
+@test_throws Exception angle([1,2,3])
+@test_throws Exception angle(SVector(1))
+@test_throws Exception angle(SVector(3))
+
+# Test floor function
+@test floor(11, 10) ≈ 10
+@test floor(15, 10) ≈ 10
+@test floor(19, 10) ≈ 10
+
+# Test round function
+@test round(11, 10) ≈ 10
+@test round(15, 10) ≈ 20
+@test round(19, 10) ≈ 20
+
+# Test ceil function
+@test ceil(11, 10) ≈ 20
+@test ceil(15, 10) ≈ 20
+@test ceil(19, 10) ≈ 20
