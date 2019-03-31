@@ -12,6 +12,22 @@ end
 angle(v::SVector{2, <:Real})  = atan(v[2],v[1])
 
 """
+    sqrt(z, branchcutangle::Real=π) -> typeof(z)
+
+Return \\sqrt{x}, analytically continued from real line with the branch cut from 0 in a straight line along `branchcutangle`
+"""
+function sqrt(z, branchcutangle::Real)
+
+    if branchcutangle > 0
+        if angle(z) > branchcutangle return -sqrt(z) end
+    else
+        if angle(z) < branchcutangle return -sqrt(z) end
+    end
+
+    return sqrt(z)
+end
+
+"""
     round(num::Real, base::Real) -> Real
 
 Nearest multiple of `base` to `num`, result will be promoted to num and base

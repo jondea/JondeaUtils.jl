@@ -60,6 +60,18 @@ finite_diff(f,x,ε) = (f(x+ε) - f(x))/ε
 @test_throws Exception angle(SVector(1))
 @test_throws Exception angle(SVector(3))
 
+# Branch cut at π should be same as built-in function
+@test all(     sqrt.(exp.(im.*range(-π,stop=π,length=21)), π) 
+           .== sqrt.(exp.(im.*range(-π,stop=π,length=21))))
+
+# Hand picked examples where specific branches should be picked
+@test sqrt.(-1.0+1.0im, π/2) == -sqrt(-1.0+1.0im)
+@test sqrt.( 1.0+1.0im, π/2) ==  sqrt( 1.0+1.0im)
+
+# Values along real line should always be the same
+@test all(     sqrt.(range(0,stop=100,length=5), range(-π,stop=π,length=7)') 
+           .== sqrt.(range(0,stop=100,length=5)))
+
 # Test floor function
 @test floor(11, 10) ≈ 10
 @test floor(15, 10) ≈ 10

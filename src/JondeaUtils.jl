@@ -15,6 +15,7 @@ export real_cols_to_complex,
        greens,
        blues,
        angle,
+       sqrt,
        round,
        ceil,
        floor
@@ -25,6 +26,7 @@ import Colors: RGB
 import StaticArrays: SVector
 
 import Base.angle
+import Base.sqrt
 import Base.round
 import Base.ceil
 import Base.floor
